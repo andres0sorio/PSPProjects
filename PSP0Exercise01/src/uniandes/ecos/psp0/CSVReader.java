@@ -63,14 +63,14 @@ public class CSVReader {
 		} catch (FileNotFoundException e) {
 			System.out.println("File not found, please check!.");
 		} catch (IOException e) {
-			System.out.println("IO error. Please check");
+			System.out.println("IO error, please check");
 		} finally {
 			if (buffer != null) {
 				try {
 					if(nrow == 0)
-						System.out.println("Empty file.");
+						System.out.println("Current file is empty. Nothing to do.");
 					else
-						System.out.println("File read. End of file reached");
+						System.out.println("End of file reached, success.");
 					buffer.close();
 				} catch (IOException e) {
 					System.out.println("IO error at closing file.");
