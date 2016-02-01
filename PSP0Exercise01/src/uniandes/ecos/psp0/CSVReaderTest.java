@@ -43,5 +43,13 @@ public class CSVReaderTest {
 		CSVReader test = new CSVReader(infile);
 		test.readFile();
 	}
+	
+	@Test
+	public void testCorruptedFile() {
+		String path = "./data/test/";
+		String infile = path + "datos-Prueba4.csv";
+		CSVReader test = new CSVReader(infile);
+		test.readFile();
+	}
 
 }
