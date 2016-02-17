@@ -27,18 +27,23 @@ public class RunLocCounter {
 	 */
 	public static void main(String[] args) {
 
-		FileChaser finder = new FileChaser("D:\\GIT\\PSPProjects");
+		// FileChaser finder = new FileChaser("D:\\GIT\\PSPProjects");
+		FileChaser finder = new FileChaser("./src");
 
-		finder.processRoot();
+		try {
+			finder.processRoot();
 
-		ArrayList<String> java_files = finder.getAllFiles();
+			ArrayList<String> java_files = finder.getAllFiles();
 
-		JavaCodeAnalyzer analyzer = new JavaCodeAnalyzer(java_files);
+			JavaCodeAnalyzer analyzer = new JavaCodeAnalyzer(java_files);
 
-		analyzer.beginJob();
-		analyzer.analyze();
-		analyzer.endJob();
-
+			analyzer.beginJob();
+			analyzer.analyze();
+			analyzer.endJob();
+		} catch (NullPointerException e) {
+			System.out.println("Given path is not valid! Please check");
+			System.exit(1);
+		}
 	}
 
 }

@@ -46,6 +46,7 @@ public class JavaCodeComponents {
 	}
 
 	public Integer getNumClasses() {
+		numClasses = className.size();
 		return numClasses;
 	}
 
@@ -54,6 +55,7 @@ public class JavaCodeComponents {
 	}
 
 	public Integer getNumMethods() {
+		numMethods = methodName.size();
 		return numMethods;
 	}
 

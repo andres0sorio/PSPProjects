@@ -44,32 +44,18 @@ public class PlainFileReader {
 	public void readFile() {
 
 		try {
-
 			buffer = new BufferedReader(new FileReader(inputFile));
-
-
 			while ((line = buffer.readLine()) != null) {
-
 				lines.add(line);
 				nlines++;
-				
 			}
-
-		} catch (
-
-		FileNotFoundException e)
-
-		{
+		} catch (FileNotFoundException e) {
+			System.out.println("No file found! Please check");
 			e.printStackTrace();
-		} catch (
-
-		IOException e)
-
-		{
+		} catch (IOException e) {
+			System.out.println("Cannot open file! Please check");
 			e.printStackTrace();
-		} finally
-
-		{
+		} finally {
 			if (buffer != null) {
 				try {
 					System.out.println("End of file reached. Total lines read: " + nlines);
@@ -79,7 +65,6 @@ public class PlainFileReader {
 				}
 			}
 		}
-
 	}
 
 	public ArrayList<String> getLines() {

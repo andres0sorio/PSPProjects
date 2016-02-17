@@ -40,7 +40,7 @@ public class JavaCodeAnalyzer {
 		expressions = new ArrayList<String>();
 		patterns = new ArrayList<Pattern>();
 		javaResults = new ArrayList<JavaCodeComponents>();
-		results = new TableReport();
+		results = new TableReport("** Java Code Counter **");
 
 	}
 
@@ -78,10 +78,11 @@ public class JavaCodeAnalyzer {
 
 			String fileName = itrFile.next();
 			PlainFileReader reader = new PlainFileReader(fileName);
+			reader.readFile();
 			ArrayList<String> data = reader.getLines();
 			Iterator<String> itrData = data.iterator();
 			JavaCodeComponents javaCode = new JavaCodeComponents(fileName);
-
+			System.out.println(fileName + " " + data.size());
 			while (itrData.hasNext()) {
 
 				itrPattern = patterns.iterator();
@@ -92,13 +93,12 @@ public class JavaCodeAnalyzer {
 					matcher = itrPattern.next().matcher(currentLine);
 
 					while (matcher.find()) {
-
-						// System.out.format(
-						// "I found the text" + " \"%s\" starting at " + "index
-						// %d
-						// and ending at index %d.%n",
-						// matcher.group(), matcher.start(), matcher.end());
-
+						/*
+						 * System.out.format( "I found the text" +
+						 * " \"%s\" starting at " +
+						 * "index %d  and ending at index %d.%n",
+						 * matcher.group(), matcher.start(), matcher.end());
+						 */
 						if (matcher.group().contains("class")) {
 							javaCode.addClass("myclass");
 						} else {
@@ -112,6 +112,24 @@ public class JavaCodeAnalyzer {
 	}
 
 	public void endJob() {
+
+		Iterator<JavaCodeComponents> itrResults = javaResults.iterator();
+
+		int total_parts = 0;
+		int total_items = 0;
+
+		while (itrResults.hasNext()) {
+
+			JavaCodeComponents current = itrResults.next();
+			total_parts += current.getNumClasses();
+			total_items += current.getNumMethods();
+
+		}
+
+		results.addRow("Parts:", total_parts);
+		results.addRow("Items:", total_items);
+
+		System.out.println(results);
 
 		System.out.println("endJob> done!");
 

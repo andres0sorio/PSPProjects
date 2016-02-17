@@ -3,6 +3,9 @@
  */
 
 package uniandes.ecos.psp;
+
+import java.util.ArrayList;
+
 /**
  * Package: uniandes.ecos.psp1
  *
@@ -18,5 +21,33 @@ package uniandes.ecos.psp;
  * 
  */
 public class TableReport {
+	
+	String name;
+
+	ArrayList<String> rows;
+	
+	public TableReport(String name) {
+		super();
+		this.name = name;
+		rows = new ArrayList<String>();
+	}
+	
+	public void addRow(String description, Integer value) {
+		
+		String add_row = description + " " + value + "\n";
+		rows.add(add_row);
+
+	}
+
+	@Override
+	public String toString() {
+		
+		String table_report = "\n";
+		table_report += "TableReport " + name + "\n";
+		for (int nrow = 0; nrow < rows.size(); ++nrow) {
+			table_report += rows.get(nrow);
+		}
+		return table_report;
+	}
 
 }
