@@ -6,7 +6,7 @@ package uniandes.ecos.psp;
 /**
  * Package: uniandes.ecos.psp
  *
- * Class: App App.java
+ * Class: IPairs IPairs.java
  * 
  * Original Author: @author AOSORIO
  * 
@@ -14,17 +14,12 @@ package uniandes.ecos.psp;
  * 
  * Implementation: [Notes on implementation]
  *
- * Created: Feb 29, 2016 1:32:16 PM
+ * Created: Feb 29, 2016 4:17:38 AM
  * 
  */
-public class App {
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+public interface IPair<T,K> {
+	
+	public T getX();
+	public K getY();
 
 }
