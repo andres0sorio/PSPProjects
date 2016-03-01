@@ -3,6 +3,7 @@
  */
 
 package uniandes.ecos.psp;
+
 /**
  * Package: uniandes.ecos.psp
  *
@@ -17,7 +18,7 @@ package uniandes.ecos.psp;
  * Created: Feb 29, 2016 4:11:30 AM
  * 
  */
-public class PairValues<T,K> implements IPair<T,K>{
+public class PairValues<T,K> implements IPair<T, K> {
 
 	private T x_Value;
 	private K y_Value;
@@ -43,7 +44,6 @@ public class PairValues<T,K> implements IPair<T,K>{
 	public void setY(K y_Value) {
 		this.y_Value = y_Value;
 	}
-	
 	
 
 }

@@ -1,3 +1,7 @@
+/** Copyright or License
+ *
+ */
+
 package uniandes.ecos.psp;
 
 import java.io.BufferedReader;
@@ -9,9 +13,20 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
- * This is a simple CSV reader. Input must be in the form of columns, each
+ * Package: uniandes.ecos.psp
+ *
+ * Class: PairValues PairValues.java
+ * 
+ * Original Author: @author AOSORIO
+ * 
+ * Description: This is a simple CSV reader. Input must be in the form of columns, each
  * column separated by a , (comma). Given we have to work out data in columns in
  * terms of Linked Lists there is a method to provide the data in such form.
+ * 
+ * Implementation: [Notes on implementation]
+ *
+ * Created: Feb 29, 2016 4:11:30 AM
+ * 
  */
 
 public class CSVReader {
@@ -107,4 +122,25 @@ public class CSVReader {
 
 	}
 
+	public LinkedList<PairValues<Double,Double>> getLinkedList(int column1, int column2) {
+
+		LinkedList<PairValues<Double,Double>> pairOfColumns = new LinkedList<PairValues<Double,Double>>();
+		
+		ArrayList<Double> data1 = this.getSingleColumn(column1);
+		ArrayList<Double> data2 = this.getSingleColumn(column2);
+
+		// Convert the arrays list to a linked list
+		int maxRows = data1.size();
+
+		for(int iVal = 0; iVal < maxRows; ++iVal ) {
+			
+			PairValues<Double,Double> xy = new PairValues<Double,Double>(0.0,0.0);
+			xy.setX(data1.get(iVal));
+			xy.setY(data2.get(iVal));
+			pairOfColumns.add( xy );
+			
+		}
+		return pairOfColumns;
+	}
+	
 }

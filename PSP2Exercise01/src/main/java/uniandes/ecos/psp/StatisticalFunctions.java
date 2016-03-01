@@ -152,7 +152,7 @@ public class StatisticalFunctions {
 
 		double denominator = Math.sqrt( ((nPoints*sumX2)-(sumX*sumX))*((nPoints*sumY2)-(sumY*sumY)));
 				
-		double Rxy = ((nPoints*sumXY) - (sumX + sumY))/ denominator;
+		double Rxy = ((nPoints*sumXY) - (sumX*sumY))/ denominator;
 
 		return Rxy;
 		
