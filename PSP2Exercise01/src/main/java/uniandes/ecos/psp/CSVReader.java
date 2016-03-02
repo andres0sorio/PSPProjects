@@ -31,7 +31,7 @@ import java.util.LinkedList;
 
 public class CSVReader {
 
-	private String inputFile;
+	private String inputFile = "";
 
 	BufferedReader buffer = null;
 

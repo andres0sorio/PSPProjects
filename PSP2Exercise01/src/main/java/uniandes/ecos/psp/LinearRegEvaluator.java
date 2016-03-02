@@ -114,4 +114,10 @@ public class LinearRegEvaluator {
 
 	}
 
+	public String getHTML() {
+		String table_result = output.toHTML();
+		String table_expected = expected.toHTML();
+		return table_result + table_expected;
+	}
+
 }

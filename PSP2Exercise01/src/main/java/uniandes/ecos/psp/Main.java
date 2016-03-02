@@ -4,13 +4,10 @@
 
 package uniandes.ecos.psp;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 /**
  * Package: uniandes.ecos.psp
  *
- * Class: App App.java
+ * Class: Main Main.java
  * 
  * Original Author: @author AOSORIO
  * 
@@ -21,7 +18,7 @@ import java.util.LinkedList;
  * Created: Feb 29, 2016 1:32:16 PM
  * 
  */
-public class App {
+public class Main {
 
 	/**
 	 * @param args
@@ -36,7 +33,13 @@ public class App {
 		linReg.printReport();
 		
 		linReg.printExpected("./data/", "Table-2.csv");
+		
+		String htmlOutput = linReg.getHTML();
 
+		String htmlTable = "<table> " + htmlOutput + "</table>";
+		
+		System.out.println(htmlTable);
+		
 	}
 
 }
