@@ -15,13 +15,13 @@ import java.util.ArrayList;
  * 
  * Description: Encapsulate here the Java code components (class name, methods)
  * 
- * Implementation:
+ * Implementation: 
  *
  * Created: Feb 15, 2016 8:42:24 AM
  * 
  */
 public class JavaCodeComponents {
-
+	
 	String fileName;
 	ArrayList<String> className;
 	ArrayList<String> methodName;
@@ -31,11 +31,11 @@ public class JavaCodeComponents {
 	private int LOC;
 	private int numComments;
 	private boolean insideOfComment;
-
+		
 	public JavaCodeComponents(String fileName) {
 		super();
 		this.fileName = fileName;
-		className = new ArrayList<String>();
+		className  = new ArrayList<String>();
 		methodName = new ArrayList<String>();
 		numClasses = 0;
 		numMethods = 0;
@@ -71,36 +71,33 @@ public class JavaCodeComponents {
 	}
 
 	public void addLine(String currentLine) {
-
-		try {
-			// Check if line is empty
-			if (currentLine.isEmpty()) {
-				setNumEmptyLines(getNumEmptyLines() + 1);
-			}
-			// Check for a simple comment
-			else if (currentLine.trim().startsWith("//")) {
-				setNumComments(getNumComments() + 1);
-				setNumComments(getNumComments() + 1);
-			} else if (currentLine.trim().startsWith("/*")) {
-				// opening of a multi line comment
-				insideOfComment = true;
-			} else if (currentLine.trim().startsWith("*/")) {
-				// closing of a multi line comment
-				insideOfComment = false;
-				setNumComments(getNumComments() + 1);
-			} else if (!insideOfComment) {
-				LOC += 1;
-			} else {
-				
-			}
-			
-		} catch (NullPointerException e) {
+		
+		//Check if line is empty
+		if ( currentLine == null ) {
+			setNumEmptyLines(getNumEmptyLines() + 1);
 			return;
+		}		
+		//Check for a simple comment
+		else if (currentLine.startsWith("//")) {
+			setNumComments(getNumComments() + 1);
 		}
+		else if ( currentLine.startsWith("/*")) {
+			//opening of a multi line comment
+			insideOfComment = true;	
+		} 
+		else if ( currentLine.startsWith("*/")) {
+			//closing of a multi line comment
+			insideOfComment = false;
+			setNumComments(getNumComments() + 1);
+		}
+		else if ( !insideOfComment ) {
+			LOC += 1;
+		}
+		else {}	
 	}
-
-	public double convertToKLOC() {
-		return LOC / 1000.0;
+	
+	public double convertToKLOC() {		
+		return LOC/1000.0;	
 	}
 
 	public int getNumComments() {
@@ -123,10 +120,4 @@ public class JavaCodeComponents {
 		this.numEmptyLines = numEmptyLines;
 	}
 	
-	public String getClassName() {
-		if (className.size() != 0)
-			return className.get(0);
-		else return "-";
-	}
-
 }

@@ -27,9 +27,9 @@ public class RunLocCounter {
 	 */
 	public static void main(String[] args) {
 
-		// FileChaser finder = new FileChaser("D:\\GIT\\PSPProjects");
-		FileChaser finder = new FileChaser("./src");
-
+		//FileChaser finder = new FileChaser("D:\\GIT\\PSPProjects");
+		FileChaser finder = new FileChaser("D:\\GIT\\PSPProjects\\PSP1Exercise01");
+		//FileChaser finder = new FileChaser("D:\\GIT\\PSPProjects\\PSP1Exercise01\\test");
 		try {
 			finder.processRoot();
 
@@ -41,7 +41,7 @@ public class RunLocCounter {
 			analyzer.analyze();
 			analyzer.endJob();
 		} catch (NullPointerException e) {
-			System.out.println("Given path is not valid! Please check");
+			System.out.println("You have a nullpointer exception! please check");
 			System.exit(1);
 		}
 	}

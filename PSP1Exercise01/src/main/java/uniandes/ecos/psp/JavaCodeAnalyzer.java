@@ -83,10 +83,13 @@ public class JavaCodeAnalyzer {
 			Iterator<String> itrData = data.iterator();
 			JavaCodeComponents javaCode = new JavaCodeComponents(fileName);
 			System.out.println(fileName + " " + data.size());
+			
 			while (itrData.hasNext()) {
 
 				itrPattern = patterns.iterator();
 				String currentLine = itrData.next();
+				
+				javaCode.addLine(currentLine);
 
 				while (itrPattern.hasNext()) {
 
@@ -100,7 +103,7 @@ public class JavaCodeAnalyzer {
 						 * matcher.group(), matcher.start(), matcher.end());
 						 */
 						if (matcher.group().contains("class")) {
-							javaCode.addClass("myclass");
+							javaCode.addClass(getClassName(matcher.group()));
 						} else {
 							javaCode.addMethod("mymethod");
 						}
@@ -111,23 +114,37 @@ public class JavaCodeAnalyzer {
 		}
 	}
 
+	private String getClassName(String group) {
+		System.out.println(group);
+		int pos1 = group.indexOf("class") + 5;
+		int pos2 = group.indexOf("{");
+		return group.substring(pos1, pos2);
+	}
+
 	public void endJob() {
 
 		Iterator<JavaCodeComponents> itrResults = javaResults.iterator();
 
 		int total_parts = 0;
 		int total_items = 0;
-
+		int total_LOC   = 0;
+		
 		while (itrResults.hasNext()) {
 
 			JavaCodeComponents current = itrResults.next();
 			total_parts += current.getNumClasses();
 			total_items += current.getNumMethods();
-
+			total_LOC   += current.getLOC();
+			System.out.println("current " + current.getClassName() + " " + 
+					total_parts + " " +
+					total_items + " " + 
+					total_LOC);
 		}
-
+		
+		
 		results.addRow("Parts:", total_parts);
 		results.addRow("Items:", total_items);
+		results.addRow("LOC", total_LOC);
 
 		System.out.println(results);
 
