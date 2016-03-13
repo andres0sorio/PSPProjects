@@ -104,6 +104,7 @@ public class JavaCodeAnalyzer {
 						 */
 						if (matcher.group().contains("class")) {
 							javaCode.addClass(getClassName(matcher.group()));
+							System.out.println("* " + matcher.group());
 						} else {
 							javaCode.addMethod("mymethod");
 						}
@@ -116,9 +117,8 @@ public class JavaCodeAnalyzer {
 
 	private String getClassName(String group) {
 		System.out.println(group);
-		int pos1 = group.indexOf("class") + 5;
-		int pos2 = group.indexOf("{");
-		return group.substring(pos1, pos2);
+		String [] definition = group.split(" ");
+		return definition[2];
 	}
 
 	public void endJob() {
@@ -128,17 +128,23 @@ public class JavaCodeAnalyzer {
 		int total_parts = 0;
 		int total_items = 0;
 		int total_LOC   = 0;
-		
+
 		while (itrResults.hasNext()) {
 
 			JavaCodeComponents current = itrResults.next();
+			
+			System.out.println("current " + current.getClassName() + " " + 
+					current.getNumClasses() + " " +
+					current.getNumMethods() + " " + 
+					current.getLOC() + " " +
+					current.getNumComments() + " " +
+					current.getNumEmptyLines());
+			
 			total_parts += current.getNumClasses();
 			total_items += current.getNumMethods();
 			total_LOC   += current.getLOC();
-			System.out.println("current " + current.getClassName() + " " + 
-					total_parts + " " +
-					total_items + " " + 
-					total_LOC);
+			
+			
 		}
 		
 		

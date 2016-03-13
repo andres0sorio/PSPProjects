@@ -74,7 +74,7 @@ public class JavaCodeComponents {
 
 		try {
 			// Check if line is empty
-			if (currentLine.isEmpty()) {
+			if (currentLine.trim().isEmpty()) {
 				setNumEmptyLines(getNumEmptyLines() + 1);
 			}
 			// Check for a simple comment
@@ -95,6 +95,7 @@ public class JavaCodeComponents {
 			}
 			
 		} catch (NullPointerException e) {
+			setNumEmptyLines(getNumEmptyLines() + 1);
 			return;
 		}
 	}
