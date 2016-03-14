@@ -28,9 +28,9 @@ public class RunLocCounter {
 	public static void main(String[] args) {
 
 		//FileChaser finder = new FileChaser("D:\\GIT\\PSPProjects");
-		//FileChaser finder = new FileChaser("D:\\GIT\\PSPProjects\\PSP1Exercise01");
+		FileChaser finder = new FileChaser("D:\\GIT\\PSPProjects\\PSP2Exercise02");
 		//FileChaser finder = new FileChaser("D:\\GIT\\PSPProjects\\PSP1Exercise01\\test");
-		FileChaser finder = new FileChaser("/home/aosorio/GIT/PSPProjects");
+		//FileChaser finder = new FileChaser("/home/aosorio/GIT/PSPProjects");
 		try {
 			finder.processRoot();
 

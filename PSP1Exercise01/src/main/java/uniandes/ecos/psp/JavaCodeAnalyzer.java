@@ -134,12 +134,12 @@ public class JavaCodeAnalyzer {
 
 			JavaCodeComponents current = itrResults.next();
 			
-			System.out.println("current " + current.getClassName() + " " + 
-					current.getNumClasses() + " " +
-					current.getNumMethods() + " " + 
-					current.getLOC() + " " +
-					current.getNumComments() + " " +
-					current.getNumEmptyLines());
+			System.out.println(current.getClassName());
+			System.out.println(" Items" + "\t" + current.getNumClasses());
+			System.out.println(" Parts" + "\t" + current.getNumMethods()); 
+			System.out.println(" LOC"   + "\t" + current.getLOC());
+			//current.getNumComments()
+			//current.getNumEmptyLines()
 			
 			total_parts += current.getNumClasses();
 			total_items += current.getNumMethods();
