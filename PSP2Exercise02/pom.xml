@@ -58,7 +58,7 @@
         <artifactId>heroku-maven-plugin</artifactId>
         <version>1.0.0</version>
         <configuration>
-          <appName>shrouded-citadel-23065</appName>
+          <appName>sleepy-sea-41863</appName>
         </configuration>
       </plugin>
     </plugins>
