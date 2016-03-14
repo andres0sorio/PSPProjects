@@ -39,7 +39,8 @@ public class TableReport {
 	}
 
 	public void addRow(String description, Double x) {
-		String add_row = description + " " + x + "\n";
+		String value = String.format("%.4f", x);
+		String add_row = description + " " + value + "\n";
 		rows.add(add_row);
 	}
 
@@ -51,12 +52,15 @@ public class TableReport {
 	public String toHTML() {
 
 		String table_report = "<tr>";
-		table_report += "<td> TableReport " + name + "</td>";
+		table_report += "<td> TableReport " + name + "</td></tr><tr>";
 		for (int nrow = 0; nrow < rows.size(); ++nrow) {
 			String item = rows.get(nrow).replace("\n", "");
 			table_report += "<td>" + item + "</td>";
+			if ( ( (nrow+1) % 6) == 0 && nrow != rows.size() - 1)
+				table_report += "</tr><tr>";
+			else if ( nrow == rows.size() - 1)
+				table_report += "</tr>";
 		}
-		table_report += "</tr>";
 		return table_report;
 	}
 	
