@@ -52,6 +52,7 @@ public class JavaCodeAnalyzer {
 		expressions.add("private\\s((?!class)(.*\\{))"); // private method
 		expressions.add("protected\\s((?=class)(.*\\{))"); // protected class
 		expressions.add("protected\\s((?!class)(.*\\{))"); // protected method
+		expressions.add("public\\s((?=interface)(.*\\{))"); // public interface
 
 		Iterator<String> itrExpr = expressions.iterator();
 		while (itrExpr.hasNext()) {
