@@ -2,7 +2,6 @@
  *
  */
 
-
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -79,7 +78,7 @@ public class StatisticalFunctions {
 		}
 		return sum;
 	}
-	
+
 	public static double evalSumSqr(LinkedList<Double> input) {
 
 		double sum = 0.0;
@@ -102,36 +101,36 @@ public class StatisticalFunctions {
 			PairValues<Double, Double> xy = (PairValues<Double, Double>) itr.next();
 			sumXY += xy.getX() * xy.getY();
 		}
-		
+
 		return sumXY;
-		
+
 	}
-	
+
 	public static PairValues<Double, Double> evalLinearRegression(LinkedList<PairValues<Double, Double>> input) {
 
 		double beta0 = 0.0;
 		double beta1 = 0.0;
 
-		LinkedList<Double> xValues = extractPair(input,0);
-		LinkedList<Double> yValues = extractPair(input,1);
-		
+		LinkedList<Double> xValues = extractPair(input, 0);
+		LinkedList<Double> yValues = extractPair(input, 1);
+
 		int nPoints = input.size();
 
-		double sumXY     = evalSumXY(input);
-		double xAvg      = evalMean(xValues);
-		double yAvg      = evalMean(yValues);
-		double nXavgYavg = nPoints*xAvg*yAvg;
-		double sumX2     = evalSumSqr(xValues);
-		double nXavg2    = nPoints*xAvg*xAvg;
+		double sumXY = evalSumXY(input);
+		double xAvg = evalMean(xValues);
+		double yAvg = evalMean(yValues);
+		double nXavgYavg = nPoints * xAvg * yAvg;
+		double sumX2 = evalSumSqr(xValues);
+		double nXavg2 = nPoints * xAvg * xAvg;
 
 		beta1 = (sumXY - nXavgYavg) / (sumX2 - nXavg2);
-		beta0 = yAvg - (beta1*xAvg);
+		beta0 = yAvg - (beta1 * xAvg);
 
 		PairValues<Double, Double> coefficients = new PairValues<Double, Double>(0.0, 0.0);
 
 		coefficients.setX(beta0);
 		coefficients.setY(beta1);
-		
+
 		return coefficients;
 
 	}
@@ -139,29 +138,29 @@ public class StatisticalFunctions {
 	public static double evalCorrXY(LinkedList<PairValues<Double, Double>> input) {
 
 		int nPoints = input.size();
-		
-		LinkedList<Double> xValues = extractPair(input,0);
-		LinkedList<Double> yValues = extractPair(input,1);
-		
-		double sumXY     = evalSumXY(input);
-		double sumX      = evalSum(xValues);
-		double sumY      = evalSum(yValues);
-		double sumX2     = evalSumSqr(xValues);
-		double sumY2     = evalSumSqr(yValues);
 
-		double denominator = Math.sqrt( ((nPoints*sumX2)-(sumX*sumX))*((nPoints*sumY2)-(sumY*sumY)));
-				
-		double Rxy = ((nPoints*sumXY) - (sumX*sumY))/ denominator;
+		LinkedList<Double> xValues = extractPair(input, 0);
+		LinkedList<Double> yValues = extractPair(input, 1);
+
+		double sumXY = evalSumXY(input);
+		double sumX = evalSum(xValues);
+		double sumY = evalSum(yValues);
+		double sumX2 = evalSumSqr(xValues);
+		double sumY2 = evalSumSqr(yValues);
+
+		double denominator = Math.sqrt(((nPoints * sumX2) - (sumX * sumX)) * ((nPoints * sumY2) - (sumY * sumY)));
+
+		double Rxy = ((nPoints * sumXY) - (sumX * sumY)) / denominator;
 
 		return Rxy;
-		
+
 	}
 
 	public static double evalCorr2(LinkedList<PairValues<Double, Double>> input) {
 
 		double Rxy = evalCorrXY(input);
-		return Rxy*Rxy;
-		
+		return Rxy * Rxy;
+
 	}
 
 	public static LinkedList<Double> extractPair(LinkedList<PairValues<Double, Double>> input, int pair) {
@@ -169,17 +168,36 @@ public class StatisticalFunctions {
 		LinkedList<Double> result = new LinkedList<Double>();
 
 		Iterator<PairValues<Double, Double>> itr = input.iterator();
-		
+
 		while (itr.hasNext()) {
 			PairValues<Double, Double> xy = (PairValues<Double, Double>) itr.next();
-			if(pair == 0) 
+			if (pair == 0)
 				result.add(xy.getX());
 			else if (pair == 1)
 				result.add(xy.getY());
-			else {}
+			else {
+			}
 		}
-		
+
 		return result;
+	}
+
+	public static double evalVariance(LinkedList<Double> input) {
+
+		double sum = 0.0;
+		double avg = evalMean(input);
+		double max = input.size();
+
+		Iterator<Double> itr = input.iterator();
+
+		while (itr.hasNext()) {
+			double xi = itr.next();
+			double value = ( xi - avg) * ( xi - avg);
+			sum += value;
+		}
+
+		max = (double) max-1.0;
+		return sum / max;
 	}
 
 }

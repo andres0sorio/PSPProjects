@@ -18,71 +18,30 @@ public class Main {
 	public static void main(String[] args) {
 
 		boolean canProceed = false;
+
+		final String dir = System.getProperty("user.dir");
+
+		String path = dir + "/data/";
+		String infile = path + "Tabla-1.csv";
+
+		RelSizeClassifier sd1 = new RelSizeClassifier("LOC/Method");
+		sd1.runClassification(path, infile, true);
+
+		infile = path + "Tabla-2.csv";
+		RelSizeClassifier sd2 = new RelSizeClassifier("Pages/Chapter");
+		sd2.runClassification(path, infile, false);
+
+		sd1.printSummary();
+		sd2.printSummary();
+
 		/*
-		 * LinearRegEvaluator linReg = null; String workingdirectory =
-		 * System.getProperty("user.dir");
+		 * TableReport expected = new TableReport("Expected values");
 		 * 
-		 * try {
 		 * 
-		 * linReg = new LinearRegEvaluator(workingdirectory+"/data/",
-		 * "Table-1.csv");
-		 * 
-		 * canProceed = true;
-		 * 
-		 * } catch (FileNotFoundException e) { canProceed = false; }
-		 * 
-		 * if (canProceed) {
-		 * 
-		 * linReg.doLinearRegression(); linReg.printReport();
-		 * linReg.printExpected(workingdirectory+"/data/", "Table-2.csv");
-		 * String htmlOutput = linReg.getHTML(); String htmlTable = "<table> " +
-		 * htmlOutput + "</table>"; //System.out.println(htmlTable);
-		 * port(Integer.valueOf(System.getenv("PORT")));
-		 * staticFileLocation("/public"); get("/hello", (req, res) ->
-		 * htmlTable);
-		 * 
-		 * } else { String htmlTable = "Error reading input file"; get("/hello",
-		 * (req, res) -> htmlTable); }
+		 * try { CSVReader data = new CSVReader(path + "Tabla-3.csv");
+		 * data.readFile(); } catch (FileNotFoundException e) {
+		 * e.printStackTrace(); }
 		 */
-
-		get("/hello", (req, res) -> "Hello you fucking piece of shit");
-
-		get("/", (request, response) -> {
-			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("message", "Hello World!");
-
-			return new ModelAndView(attributes, "index.ftl");
-		} , new FreeMarkerEngine());
-
-		get("/db", (req, res) -> {
-			Connection connection = null;
-			Map<String, Object> attributes = new HashMap<>();
-			try {
-				connection = DatabaseUrl.extract().getConnection();
-
-				Statement stmt = connection.createStatement();
-				stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-				stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-				ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
-
-				ArrayList<String> output = new ArrayList<String>();
-				while (rs.next()) {
-					output.add("Read from DB: " + rs.getTimestamp("tick"));
-				}
-
-				attributes.put("results", output);
-				return new ModelAndView(attributes, "db.ftl");
-			} catch (Exception e) {
-				attributes.put("message", "There was an error: " + e);
-				return new ModelAndView(attributes, "error.ftl");
-			} finally {
-				if (connection != null)
-					try {
-						connection.close();
-					} catch (SQLException e) {
-					}
-			}
-		} , new FreeMarkerEngine());
 
 	}
 
