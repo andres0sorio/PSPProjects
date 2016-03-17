@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * Package: 
  *
- * Class: StdDevTests StdDevTests.java
+ * Class: StdDevTest StdDevTest.java
  * 
  * Original Author: @author AOSORIO
  * 
@@ -20,7 +20,7 @@ import org.junit.Test;
  * Created: Mar 17, 2016 12:47:53 PM
  * 
  */
-public class StdDevTests {
+public class StdDevTest {
 
 	@Test
 	public void testTable1() {
