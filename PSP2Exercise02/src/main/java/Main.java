@@ -17,6 +17,16 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		String message = doPSP2Exercise02();
+		
+		System.out.println(message);
+		
+	}
+
+	public static String doPSP2Exercise02() {
+		
+		String message = "";
+		
 		final String dir = System.getProperty("user.dir");
 
 		String path = dir + "/data/";
@@ -41,9 +51,15 @@ public class Main {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
 		System.out.println(expected);
 
+		String table1 = sd1.output.toHTML();
+		String table2 = sd2.output.toHTML();
+		String table3 = expected.toHTML();
+				
+		return (table1+table2+table3);
+		
 	}
-
+	
+	
 }
