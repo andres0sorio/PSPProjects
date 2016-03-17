@@ -40,10 +40,17 @@ public class CSVReader {
 
 	ArrayList<ArrayList<Double>> table = new ArrayList<ArrayList<Double>>();
 
+	/** Constructor - gets the input file string
+	 * @param infile
+	 */
 	public CSVReader(String infile) {
 		inputFile = infile;
 	}
 
+	/** This is the core of the class: opens and reads the file
+	 *  data is stored and converted in a matrix
+	 * @throws FileNotFoundException
+	 */
 	public void readFile() throws FileNotFoundException {
 
 		try {
@@ -96,15 +103,42 @@ public class CSVReader {
 		}
 	}
 
+	/**
+	 * @return table: 
+	 */
 	public ArrayList<ArrayList<Double>> getTable() {
 		return table;
 	}
 
+	/**
+	 * @param title ;
+	 * @return formated Data (separated by tab)
+	 */
+	public TableReport getTable(String title) {
+		TableReport formatedData = new TableReport(title);
+		for( int n=0; n < table.size(); ++n) {
+			String currentRow = "";
+			for( int m=0; m < table.get(n).size(); ++m){
+				currentRow += table.get(n).get(m) + "\t";
+			}
+			formatedData.addRow(currentRow);
+		}
+		return formatedData;
+	}
+	
+	/**
+	 * @param column
+	 * @return
+	 */
 	public ArrayList<Double> getSingleColumn(int column) {
 		ArrayList<Double> selectedColumn = table.get(column);
 		return selectedColumn;
 	}
 
+	/**
+	 * @param column
+	 * @return
+	 */
 	public LinkedList<Double> getLinkedList(int column) {
 
 		LinkedList<Double> singleColumn = new LinkedList<Double>();
@@ -122,6 +156,11 @@ public class CSVReader {
 
 	}
 
+	/**
+	 * @param column1
+	 * @param column2
+	 * @return
+	 */
 	public LinkedList<PairValues<Double,Double>> getLinkedList(int column1, int column2) {
 
 		LinkedList<PairValues<Double,Double>> pairOfColumns = new LinkedList<PairValues<Double,Double>>();

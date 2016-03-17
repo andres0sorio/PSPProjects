@@ -62,12 +62,17 @@ public class RelSizeClassifier {
 		
 	}
 	
-	public void printSummary() {
-		
-		System.out.println(output);
-		
+	
+	
+	/**
+	 * @return the relSizeRanges
+	 */
+	public StdDevRanges getRelSizeRanges() {
+		return RelSizeRanges;
 	}
-	
-	
-	
+
+	public void printSummary() {	
+		System.out.println(output);
+	}
+		
 }

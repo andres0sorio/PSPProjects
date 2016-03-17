@@ -22,32 +22,48 @@ import java.util.ArrayList;
 public class TableReport {
 
 	String name;
-
 	ArrayList<String> rows;
 
+	/** Constructor - takes a title for this table
+	 * @param name
+	 */
 	public TableReport(String name) {
 		super();
 		this.name = name;
 		rows = new ArrayList<String>();
 	}
 
+	/**  Add Row based on a pair string int value
+	 * @param description
+	 * @param value
+	 */
 	public void addRow(String description, Integer value) {
 
 		String add_row = description + " " + value + "\n";
 		rows.add(add_row);
 	}
 
+	/** Add Row based on a pair string double value
+	 * @param description
+	 * @param x
+	 */
 	public void addRow(String description, Double x) {
 		String value = String.format("%.4f", x);
 		String add_row = description + " " + value + "\n";
 		rows.add(add_row);
 	}
 
+	/** Add Row based on a string
+	 * @param string
+	 */
 	public void addRow(String string) {
 		String add_row = string + "\n";
 		rows.add(add_row);
 	}
 
+	/** Generate a nice HTML table
+	 * @return
+	 */
 	public String toHTML() {
 
 		String table_report = "<tr>";
@@ -63,6 +79,9 @@ public class TableReport {
 		return table_report;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 

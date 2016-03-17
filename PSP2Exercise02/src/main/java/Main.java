@@ -17,8 +17,6 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		boolean canProceed = false;
-
 		final String dir = System.getProperty("user.dir");
 
 		String path = dir + "/data/";
@@ -34,14 +32,17 @@ public class Main {
 		sd1.printSummary();
 		sd2.printSummary();
 
-		/*
-		 * TableReport expected = new TableReport("Expected values");
-		 * 
-		 * 
-		 * try { CSVReader data = new CSVReader(path + "Tabla-3.csv");
-		 * data.readFile(); } catch (FileNotFoundException e) {
-		 * e.printStackTrace(); }
-		 */
+		TableReport expected = new TableReport("Expected values");
+
+		try {
+			CSVReader data = new CSVReader(path + "Tabla-3.csv");
+			data.readFile();
+			expected = data.getTable("Expected results");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(expected);
 
 	}
 

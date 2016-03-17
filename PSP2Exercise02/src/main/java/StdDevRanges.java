@@ -34,6 +34,11 @@ public class StdDevRanges {
 
 	Map<String, Double> Ranges = null;
 
+	/** Constructor
+	 * @param path
+	 * @param infile
+	 * @throws FileNotFoundException
+	 */
 	public StdDevRanges(String path, String infile) throws FileNotFoundException {
 		super();
 		this.path = path;
@@ -52,6 +57,9 @@ public class StdDevRanges {
 		}
 	}
 
+	/** Some data need pre-processing 
+	 * @param preprocess
+	 */
 	public void processData(boolean preprocess) {
 
 		LinkedList<Double> column1 = data.getLinkedList(0);
@@ -78,6 +86,9 @@ public class StdDevRanges {
 
 	}
 
+	/**
+	 * Takes the log of the input values
+	 */
 	public void setLog() {
 
 		Iterator<Double> itr = inputValues.iterator();
@@ -90,19 +101,26 @@ public class StdDevRanges {
 
 	}
 
+	/**
+	 * Get the input and create the relative size based on sigmas
+	 */
 	public void setLogRanges() {
 
 		double sigma = StatisticalFunctions.evalStdDev(logValues);
 		double avg = StatisticalFunctions.evalMean(logValues);
 
 		Ranges.put("VS", Math.exp(avg - 2.0 * sigma));
-		Ranges.put("S", Math.exp(avg - 1.0 * sigma));
-		Ranges.put("M", Math.exp(avg));
-		Ranges.put("L", Math.exp(avg + 1.0 * sigma));
+		Ranges.put("S",  Math.exp(avg - 1.0 * sigma));
+		Ranges.put("M",  Math.exp(avg));
+		Ranges.put("L",  Math.exp(avg + 1.0 * sigma));
 		Ranges.put("VL", Math.exp(avg + 2.0 * sigma));
 
 	}
 
+	/**
+	 * @param key
+	 * @return value
+	 */
 	public double getRange(String key) {
 		double value = Ranges.get(key);
 		return value;
