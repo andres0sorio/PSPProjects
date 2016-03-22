@@ -66,17 +66,20 @@ public class TableReport {
 	 */
 	public String toHTML() {
 
-		String table_report = "<tr>";
-		table_report += "<td> TableReport " + name + "</td></tr><tr>";
-		for (int nrow = 0; nrow < rows.size(); ++nrow) {
-			String item = rows.get(nrow).replace("\n", "");
-			table_report += "<td>" + item + "</td>";
-			if ( ( (nrow+1) % 6) == 0 && nrow != rows.size() - 1)
-				table_report += "</tr><tr>";
-			else if ( nrow == rows.size() - 1)
-				table_report += "</tr>";
+	    String table_report = "<style>#customers th {background-color:#4CAF50;color:white;}";
+	    table_report += "#customers td, #customers th {border: 1px solid #ddd;}</style>";
+	    table_report += "<table id=\"customers\"><tr>";
+	    table_report += "<th> TableReport " + name + "</th></tr><tr>";
+	    for (int nrow = 0; nrow < rows.size(); ++nrow) {
+		String item = rows.get(nrow).replace("\n", "");
+		String[] items = item.split("\t");
+		for (String td : items) {
+		    table_report += "<td>" + td + "</td>";
 		}
-		return table_report;
+		table_report += "</tr><tr>";
+	    }
+	    table_report += "</table>";
+	    return table_report;
 	}
 	
 	/* (non-Javadoc)
