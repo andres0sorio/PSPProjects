@@ -1,17 +1,4 @@
-import java.sql.*;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Map;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import static spark.Spark.*;
-import spark.template.freemarker.FreeMarkerEngine;
-import spark.ModelAndView;
-import static spark.Spark.get;
-
-import com.heroku.sdk.jdbc.DatabaseUrl;
+import java.text.DecimalFormat;
 
 public class Main {
 
@@ -24,23 +11,46 @@ public class Main {
 	}
 
 	public static String doPSP2Exercise03() {
-		
+
 		double result1 = 0.0;
 		double result2 = 0.0;
 		double result3 = 0.0;
-		
-		double [] params = new double[1];
-		params[0] = 1.0;
 
-		OneDimFunction sqrtFunct = (OneDimFunction) new SomeFunction(params);
+		DecimalFormat df=new DecimalFormat("0.00000");
+ 		
+		TableReport summary = new TableReport("Numerical Integration with Simpson's Rule");
+		summary.addRow("Range \t \t dof \t expected \t result");
+		
+		double[] params = new double[2];
+		params[0] = 9.0; // dof
 
-		NumericalIntegration numIntegration = new NumericalIntegration(sqrtFunct, 1.0, 10.0);
+		OneDimFunction tDistFunction = (OneDimFunction) new tDistributionFunction(params);
+
+		NumericalIntegration numIntegration = new NumericalIntegration(tDistFunction, 0.0, 1.1);
+
+		result1 = numIntegration.doIntegral();
+
+		String strResult = "[0.0,1.1] \t 9 \t 0.35006 \t" + df.format(result1);
+
+		summary.addRow(strResult);
 		
-		double result = numIntegration.doIntegral();
+		params[0] = 10.0; // dof
+		tDistFunction.setParams(params);
+		numIntegration.setLimits(0.0, 1.1812);
+		result2 = numIntegration.doIntegral();
+
+		strResult = "[0.0,1.1812] \t 10 \t 0.36757 \t" + df.format(result2);
+		summary.addRow(strResult);
 		
-		String strResult = "The result is: " + result;
+		params[0] = 30.0; // dof
+		tDistFunction.setParams(params);
+		numIntegration.setLimits(10.0, 2.750);
+		result3 = numIntegration.doIntegral();
+
+		strResult = "[0.0,2.750] \t 30 \t 0.49500  \t" + df.format(result3);
+		summary.addRow(strResult);
 		
-		return strResult;
+		return summary.toString();
 	}
 
 }

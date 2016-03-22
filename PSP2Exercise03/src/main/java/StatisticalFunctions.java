@@ -24,6 +24,10 @@ import org.apache.commons.math3.special.Gamma;
  */
 public class StatisticalFunctions {
 
+	/** Calculate the mean or average of input data
+	 * @param input
+	 * @return
+	 */
 	public static double evalMean(LinkedList<Double> input) {
 
 		double result = 0.0;
@@ -45,6 +49,10 @@ public class StatisticalFunctions {
 
 	}
 
+	/** Evaluate the Std dev. of input data
+	 * @param input
+	 * @return
+	 */
 	public static double evalStdDev(LinkedList<Double> input) {
 
 		double result = 0.0;
@@ -69,6 +77,10 @@ public class StatisticalFunctions {
 
 	}
 
+	/** Evaluate the sum of input data
+	 * @param input
+	 * @return
+	 */
 	public static double evalSum(LinkedList<Double> input) {
 
 		double sum = 0.0;
@@ -82,6 +94,10 @@ public class StatisticalFunctions {
 		return sum;
 	}
 
+	/** Evaluate the sum of the squares of input data
+	 * @param input
+	 * @return
+	 */
 	public static double evalSumSqr(LinkedList<Double> input) {
 
 		double sum = 0.0;
@@ -95,6 +111,10 @@ public class StatisticalFunctions {
 		return sum;
 	}
 
+	/** Evaluate the sum of X_i * Y_i
+	 * @param input
+	 * @return
+	 */
 	public static double evalSumXY(LinkedList<PairValues<Double, Double>> input) {
 
 		double sumXY = 0.0;
@@ -109,6 +129,10 @@ public class StatisticalFunctions {
 
 	}
 
+	/** Evaluate the linear regression of pairs of data <X_i, Y_i>
+	 * @param input
+	 * @return the coefficients beta_0 and beta_1
+	 */
 	public static PairValues<Double, Double> evalLinearRegression(LinkedList<PairValues<Double, Double>> input) {
 
 		double beta0 = 0.0;
@@ -138,6 +162,10 @@ public class StatisticalFunctions {
 
 	}
 
+	/** Evaluates the Correlation between XY data
+	 * @param input
+	 * @return
+	 */
 	public static double evalCorrXY(LinkedList<PairValues<Double, Double>> input) {
 
 		int nPoints = input.size();
@@ -159,6 +187,10 @@ public class StatisticalFunctions {
 
 	}
 
+	/** Evaluate the correlation coefficient squared R2
+	 * @param input
+	 * @return R2
+	 */
 	public static double evalCorr2(LinkedList<PairValues<Double, Double>> input) {
 
 		double Rxy = evalCorrXY(input);
@@ -166,6 +198,11 @@ public class StatisticalFunctions {
 
 	}
 
+	/** Auxiliary function : extract one of the pairs ( X_i or Y_i)
+	 * @param input
+	 * @param pair
+	 * @return
+	 */
 	public static LinkedList<Double> extractPair(LinkedList<PairValues<Double, Double>> input, int pair) {
 
 		LinkedList<Double> result = new LinkedList<Double>();
@@ -185,6 +222,10 @@ public class StatisticalFunctions {
 		return result;
 	}
 
+	/** Evaluates the variance of a given set of data
+	 * @param input
+	 * @return var
+	 */
 	public static double evalVariance(LinkedList<Double> input) {
 
 		double sum = 0.0;
@@ -203,15 +244,25 @@ public class StatisticalFunctions {
 		return sum / max;
 	}
 
+	/** Student t - distribution
+	 * @param x running x
+	 * @param args (only one argument d.o.f.)
+	 * @return F(x)
+	 */
 	public static double tDistribution(double x, double [] args) {
 
 		double dof = args[0];
-		double numerator = Gamma.gamma(1);
-
-		return 0.0;
+		double numerator = Gamma.gamma( (dof+1.0)/2.0 );
+		double denominator = Math.sqrt((dof*Math.PI))*Gamma.gamma(dof/2.0);		
+		return (numerator/denominator)*Math.pow((1.0+(x*x/dof)),-(dof+1.0)/2.0);
 
 	}
 
+	/** Cummulative Student t - distribution (to be implemented)
+	 * @param x running x
+	 * @param args 
+	 * @return I ( F(x) )
+	 */
 	public static double tDistributionCDF(double x, double [] args ) {
 
 		double dof = args[0];

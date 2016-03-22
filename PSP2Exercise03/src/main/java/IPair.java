@@ -9,9 +9,9 @@
  * 
  * Original Author: @author AOSORIO
  * 
- * Description: [one line class summary]
+ * Description: Interface for Pairs of values
  * 
- * Implementation: [Notes on implementation]
+ * Implementation: Interface
  *
  * Created: Feb 29, 2016 4:17:38 AM
  * 

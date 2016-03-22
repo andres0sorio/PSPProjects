@@ -19,6 +19,7 @@
 public interface OneDimFunction {
 
 	double doEval(double x);
+	void setParams(double[] params);
 	
 }
 
