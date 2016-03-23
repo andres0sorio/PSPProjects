@@ -24,7 +24,7 @@ public class Main {
 		double[] params = new double[2];
 		params[0] = 9.0; // dof
 
-		OneDimFunction tDistFunction = (OneDimFunction) new tDistributionFunction(params);
+		IOneDimFunction tDistFunction = (IOneDimFunction) new tDistributionFunction(params);
 
 		NumericalIntegration numIntegration = new NumericalIntegration(tDistFunction, 0.0, 1.1);
 
@@ -44,7 +44,7 @@ public class Main {
 		
 		params[0] = 30.0; // dof
 		tDistFunction.setParams(params);
-		numIntegration.setLimits(10.0, 2.750);
+		numIntegration.setLimits(0.0, 2.750);
 		result3 = numIntegration.doIntegral();
 
 		strResult = "[0.0,2.750] \t 30 \t 0.49500  \t" + df.format(result3);

@@ -5,7 +5,7 @@
 /**
  * Package: 
  *
- * Class: OneDimFunction OneDimFunction.java
+ * Class: IOneDimFunction IOneDimFunction.java
  * 
  * Original Author: @author AOSORIO
  * 
@@ -16,7 +16,7 @@
  * Created: Mar 21, 2016 1:56:17 AM
  * 
  */
-public interface OneDimFunction {
+public interface IOneDimFunction {
 
 	/**
 	 * @param x the variable
