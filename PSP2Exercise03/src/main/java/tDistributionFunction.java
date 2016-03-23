@@ -21,7 +21,7 @@ public class tDistributionFunction implements OneDimFunction {
 	double [] params;
 		
 	/** Constructor method
-	 * @param params
+	 * @param params the parameters of this function
 	 */
 	public tDistributionFunction(double[] params) {
 		super();

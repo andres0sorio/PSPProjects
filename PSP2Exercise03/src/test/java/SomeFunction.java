@@ -21,7 +21,7 @@ public class SomeFunction implements OneDimFunction {
 	double [] params;
 
 	/** Constructor method
-	 * @param params
+	 * @param params parameters of this function
 	 */
 	public SomeFunction(double[] params) {
 		super();

@@ -48,14 +48,14 @@ public class NumericalIntegration {
 	}
 
 	/** Getter for integrand
-	 * @return
+	 * @return the integrand function
 	 */
 	public OneDimFunction getIntegrand() {
 		return integrand;
 	}
 
 	/** Setter for integrand
-	 * @param integrand
+	 * @param integrand pass the integrand, should be an implementation of OneDimFunction
 	 */
 	public void setIntegrand(OneDimFunction integrand) {
 		this.integrand = integrand;
@@ -93,7 +93,7 @@ public class NumericalIntegration {
 	}
 
 	/** do Integration : implements Simmson's rule for numerical integration
-	 * @return result
+	 * @return result of this integral
 	 */
 	public double doIntegral() {
 

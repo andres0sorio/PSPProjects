@@ -26,7 +26,7 @@ public class TableReport {
 	/**
 	 * Constructor - takes a title for this table
 	 * 
-	 * @param name
+	 * @param name give a name for this Table
 	 */
 	public TableReport(String name) {
 		super();
@@ -37,8 +37,8 @@ public class TableReport {
 	/**
 	 * Add Row based on a pair string int value
 	 * 
-	 * @param description
-	 * @param value
+	 * @param description usually the leftmost column is a description
+	 * @param value corresponding value for this column (integet)
 	 */
 	public void addRow(String description, Integer value) {
 
@@ -49,8 +49,8 @@ public class TableReport {
 	/**
 	 * Add Row based on a pair string double value
 	 * 
-	 * @param description
-	 * @param x
+	 * @param description usually the leftmost column is a description
+	 * @param x corresponding value for this column
 	 */
 	public void addRow(String description, Double x) {
 		String value = String.format("%.4f", x);
@@ -61,7 +61,7 @@ public class TableReport {
 	/**
 	 * Add Row based on a string
 	 * 
-	 * @param string
+	 * @param string entire row in a single string
 	 */
 	public void addRow(String string) {
 		String add_row = string + "\n";
@@ -71,7 +71,7 @@ public class TableReport {
 	/**
 	 * Generate a nice HTML table
 	 * 
-	 * @return
+	 * @return string that encodes HTML table
 	 */
 	public String toHTML() {
 

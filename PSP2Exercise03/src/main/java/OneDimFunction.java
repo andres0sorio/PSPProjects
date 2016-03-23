@@ -18,7 +18,14 @@
  */
 public interface OneDimFunction {
 
+	/**
+	 * @param x the variable
+	 * @return function evaluated at x 
+	 */
 	double doEval(double x);
+	/**
+	 * @param params set the paramaters (passed as an array)
+	 */
 	void setParams(double[] params);
 	
 }

@@ -13,9 +13,9 @@ import org.junit.Test;
  * 
  * Original Author: @author AOSORIO
  * 
- * Description: [one line class summary]
+ * Description: Test for Numerical Integration class
  * 
- * Implementation: [Notes on implementation]
+ * Implementation: JUnit 4
  *
  * Created: Mar 21, 2016 8:23:34 PM
  * 
@@ -38,8 +38,8 @@ public class NumericalIntegrationTest {
 	}
 
 	/**
-	 * Test the case when the integration limits are inverted so a > b
-	 * Implementation is only for a < b
+	 * Test the case when the integration limits are inverted so a &gt; b
+	 * Implementation is only for a &lt; b
 	 */
 	@Test
 	public void TestLimits() {
