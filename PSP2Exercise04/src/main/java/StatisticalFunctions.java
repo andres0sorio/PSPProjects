@@ -244,7 +244,7 @@ public class StatisticalFunctions {
 		return sum / max;
 	}
 
-	/** Student t - distribution
+	/** t-Student distribution 
 	 * @param x running x
 	 * @param args (only one argument d.o.f.)
 	 * @return F(x)
@@ -258,7 +258,7 @@ public class StatisticalFunctions {
 
 	}
 
-	/** Cumulative Student t - distribution (to be implemented)
+	/** Cumulative t-Student distribution (lower tail ]0,x] ) 
 	 * @param x running x
 	 * @param args arguments of this function
 	 * @return I ( F(x) )
@@ -272,4 +272,16 @@ public class StatisticalFunctions {
 
 	}
 
+	/** Inverse t-Student distribution - calculates the inverse t(F,dof)
+	 * @param f expected p value
+	 * @param args arguments of this function
+	 * @return t for confidence interval
+	 */
+	public static double tDistributionInverse(double f, double [] args ) {
+
+		double result = 1.0;
+		return result;
+
+	}
+	
 }
