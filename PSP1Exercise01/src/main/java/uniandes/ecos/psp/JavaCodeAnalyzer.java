@@ -116,6 +116,15 @@ public class JavaCodeAnalyzer {
 		}
 	}
 
+	
+	
+	/**
+	 * @return the results
+	 */
+	public void saveResults(String output) {
+		results.saveToFile(output);
+	}
+
 	private String getClassName(String group) {
 		System.out.println(group);
 		String [] definition = group.split(" ");
@@ -141,14 +150,17 @@ public class JavaCodeAnalyzer {
 			//current.getNumComments()
 			//current.getNumEmptyLines()
 			
+			results.addRow("Class Name:", current.getClassName());
+			results.addRow("Parts:", current.getNumClasses());
+			results.addRow("Items:", current.getNumMethods());
+			results.addRow("LOC", current.getLOC());
+			
 			total_parts += current.getNumClasses();
 			total_items += current.getNumMethods();
 			total_LOC   += current.getLOC();
-			
-			
+					
 		}
-		
-		
+				
 		results.addRow("Parts:", total_parts);
 		results.addRow("Items:", total_items);
 		results.addRow("LOC", total_LOC);

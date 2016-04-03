@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -39,7 +40,7 @@ public class InterfazLocCounter {
 
 	private JFrame frmLocCounter;
 	private JTextField txtPath;
-
+	static final String OUTPUT_FILE = "D:\\Users\\AOSORIO\\Desktop\\LOCcounter-Output.txt";
 	/**
 	 * Launch the application.
 	 */
@@ -72,55 +73,54 @@ public class InterfazLocCounter {
 		frmLocCounter.setBounds(100, 100, 450, 169);
 		frmLocCounter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLocCounter.getContentPane().setLayout(null);
-	
+
 		txtPath = new JTextField();
 		txtPath.setText("Path");
 		txtPath.setBounds(61, 60, 315, 23);
 		frmLocCounter.getContentPane().add(txtPath);
 		txtPath.setColumns(10);
 
-		JButton btnNewButton = new JButton("Get LOC");	
+		JButton btnNewButton = new JButton("Get LOC");
 		btnNewButton.setBounds(172, 94, 89, 23);
 		frmLocCounter.getContentPane().add(btnNewButton);
-		
+
 		JLabel lblLocCounter = new JLabel("LOC Counter");
 		lblLocCounter.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLocCounter.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblLocCounter.setBounds(61, 11, 315, 38);
 		frmLocCounter.getContentPane().add(lblLocCounter);
-			
+
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String textFieldValue = txtPath.getText();
-				executeLocCounter(textFieldValue);
-				System.out.println(textFieldValue);
+				executeLocCounter(textFieldValue,OUTPUT_FILE);
+				JOptionPane.showMessageDialog(frmLocCounter, "Results saved to desktop.");
 			}
 		});
 
 	}
-	
-	public void executeLocCounter(String path) {
-		
+
+	public void executeLocCounter(String path, String output) {
+
 		FileChaser finder = new FileChaser(path);
-		
+
 		try {
-			
+
 			finder.processRoot();
 			ArrayList<String> java_files = finder.getAllFiles();
 			JavaCodeAnalyzer analyzer = new JavaCodeAnalyzer(java_files);
 			analyzer.beginJob();
 			analyzer.analyze();
 			analyzer.endJob();
+			analyzer.saveResults(output);
 			
 		} catch (NullPointerException e) {
-			
+
 			System.out.println("You have a nullpointer exception! please check");
 			System.exit(1);
-			
+
 		}
-		
-		
-		
+
 	}
-	
+
 }
