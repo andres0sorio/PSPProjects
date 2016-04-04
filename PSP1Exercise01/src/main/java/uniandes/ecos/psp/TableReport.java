@@ -37,14 +37,14 @@ public class TableReport {
 
 	public void addRow(String description, Integer value) {
 
-		String add_row = description + " " + value;
+		String add_row = description + "," + value;
 		rows.add(add_row);
 
 	}
 	
 	public void addRow(String description, String value) {
 
-		String add_row = description + " " + value;
+		String add_row = description + "," + value;
 		rows.add(add_row);
 
 	}
@@ -71,7 +71,7 @@ public class TableReport {
 	public String toString() {
 
 		String table_report = "\n";
-		table_report += "TableReport " + name + "\r\n";
+		table_report += "<TableReport> " + name + "\r\n";
 		for (int nrow = 0; nrow < rows.size(); ++nrow) {
 			table_report += rows.get(nrow) + "\r\n";
 		}

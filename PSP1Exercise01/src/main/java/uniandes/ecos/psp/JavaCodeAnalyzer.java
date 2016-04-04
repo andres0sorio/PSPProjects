@@ -32,6 +32,7 @@ public class JavaCodeAnalyzer {
 	ArrayList<JavaCodeComponents> javaResults;
 	TableReport results = null;
 	Matcher matcher = null;
+	private String root_path;
 
 	public JavaCodeAnalyzer(ArrayList<String> data) {
 		super();
@@ -84,12 +85,12 @@ public class JavaCodeAnalyzer {
 			Iterator<String> itrData = data.iterator();
 			JavaCodeComponents javaCode = new JavaCodeComponents(fileName);
 			System.out.println(fileName + " " + data.size());
-			
+
 			while (itrData.hasNext()) {
 
 				itrPattern = patterns.iterator();
 				String currentLine = itrData.next();
-				
+
 				javaCode.addLine(currentLine);
 
 				while (itrPattern.hasNext()) {
@@ -106,6 +107,9 @@ public class JavaCodeAnalyzer {
 						if (matcher.group().contains("class")) {
 							javaCode.addClass(getClassName(matcher.group()));
 							System.out.println("* " + matcher.group());
+						} else if (matcher.group().contains("interface")) {
+							javaCode.addClass(getClassName(matcher.group()));
+							System.out.println("* " + matcher.group());
 						} else {
 							javaCode.addMethod("mymethod");
 						}
@@ -116,8 +120,6 @@ public class JavaCodeAnalyzer {
 		}
 	}
 
-	
-	
 	/**
 	 * @return the results
 	 */
@@ -127,7 +129,8 @@ public class JavaCodeAnalyzer {
 
 	private String getClassName(String group) {
 		System.out.println(group);
-		String [] definition = group.split(" ");
+		String[] definition = group.split(" ");
+		System.out.println(definition[2]);
 		return definition[2];
 	}
 
@@ -137,38 +140,53 @@ public class JavaCodeAnalyzer {
 
 		int total_parts = 0;
 		int total_items = 0;
-		int total_LOC   = 0;
+		int total_LOC = 0;
 
 		while (itrResults.hasNext()) {
 
 			JavaCodeComponents current = itrResults.next();
-			
+
 			System.out.println(current.getClassName());
 			System.out.println(" Items" + "\t" + current.getNumClasses());
-			System.out.println(" Parts" + "\t" + current.getNumMethods()); 
-			System.out.println(" LOC"   + "\t" + current.getLOC());
-			//current.getNumComments()
-			//current.getNumEmptyLines()
-			
-			results.addRow("Class Name:", current.getClassName());
-			results.addRow("Parts:", current.getNumClasses());
-			results.addRow("Items:", current.getNumMethods());
+			System.out.println(" Parts" + "\t" + current.getNumMethods());
+			System.out.println(" LOC" + "\t" + current.getLOC());
+			// current.getNumComments()
+			// current.getNumEmptyLines()
+
+			results.addRow("Class Name", current.getClassName());
+			results.addRow("Parts", current.getNumClasses());
+			results.addRow("Items", current.getNumMethods());
 			results.addRow("LOC", current.getLOC());
-			
+
 			total_parts += current.getNumClasses();
 			total_items += current.getNumMethods();
-			total_LOC   += current.getLOC();
-					
+			total_LOC += current.getLOC();
+
 		}
-				
-		results.addRow("Parts:", total_parts);
-		results.addRow("Items:", total_items);
+
+		results.addRow("Root directory", getRoot_path());
+		results.addRow("Parts", total_parts);
+		results.addRow("Items", total_items);
 		results.addRow("LOC", total_LOC);
 
 		System.out.println(results);
-
 		System.out.println("endJob> done!");
 
+	}
+
+	/**
+	 * @return the root_path
+	 */
+	public String getRoot_path() {
+		return root_path;
+	}
+
+	/**
+	 * @param root_path
+	 *            the root_path to set
+	 */
+	public void setRoot_path(String root_path) {
+		this.root_path = root_path;
 	}
 
 }

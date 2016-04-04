@@ -23,7 +23,7 @@ import org.junit.Test;
 public class NumericalIntegrationTest {
 
 	/**
-	 * Test integration method againts a known integral I = Integrate[Sqrt[x],{x,1,10}=20.4152]
+	 * Test integration method against a known integral I = Integrate[Sqrt[x],{x,1,10}=20.4152]
 	 */
 	@Test
 	public void TestIntegral() {
@@ -63,7 +63,7 @@ public class NumericalIntegrationTest {
 	}
 
 	/**
-	 * Test agains the provided test (using a t-distribution function)
+	 * Test against the provided test (using a t-distribution function)
 	 * Expected value number
 	 */
 	@Test
@@ -79,7 +79,7 @@ public class NumericalIntegrationTest {
 	}
 
 	/**
-	 * Test agains the provided test (using a t-distribution function)
+	 * Test against the provided test (using a t-distribution function)
 	 * Expected value number two 
 	 */
 	@Test
@@ -95,7 +95,7 @@ public class NumericalIntegrationTest {
 	}
 
 	/**
-	 * Test agains the provided test (using a t-distribution function)
+	 * Test against the provided test (using a t-distribution function)
 	 * Expected value number three
 	 */
 	@Test

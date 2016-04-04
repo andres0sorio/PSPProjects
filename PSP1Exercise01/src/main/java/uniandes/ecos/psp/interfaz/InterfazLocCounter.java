@@ -29,18 +29,18 @@ import uniandes.ecos.psp.JavaCodeAnalyzer;
  * 
  * Original Author: @author AOSORIO
  * 
- * Description: [one line class summary]
+ * Description: GUI interface for LOC counter
  * 
- * Implementation: [Notes on implementation]
+ * Implementation: Using awt, swing
  *
- * Created: Apr 3, 2016 1:18:21 AM
+ * Created: April 3, 2016 1:18:21 AM
  * 
  */
 public class InterfazLocCounter {
 
 	private JFrame frmLocCounter;
 	private JTextField txtPath;
-	static final String OUTPUT_FILE = "D:\\Users\\AOSORIO\\Desktop\\LOCcounter-Output.txt";
+	static final String OUTPUT_FILE = "D:\\Users\\AOSORIO\\Desktop\\LOCcounter-Output.csv";
 	/**
 	 * Launch the application.
 	 */
@@ -75,7 +75,7 @@ public class InterfazLocCounter {
 		frmLocCounter.getContentPane().setLayout(null);
 
 		txtPath = new JTextField();
-		txtPath.setText("Path");
+		txtPath.setText("D:\\GIT\\PSPProjects");
 		txtPath.setBounds(61, 60, 315, 23);
 		frmLocCounter.getContentPane().add(txtPath);
 		txtPath.setColumns(10);
@@ -109,6 +109,7 @@ public class InterfazLocCounter {
 			finder.processRoot();
 			ArrayList<String> java_files = finder.getAllFiles();
 			JavaCodeAnalyzer analyzer = new JavaCodeAnalyzer(java_files);
+			analyzer.setRoot_path(path);
 			analyzer.beginJob();
 			analyzer.analyze();
 			analyzer.endJob();

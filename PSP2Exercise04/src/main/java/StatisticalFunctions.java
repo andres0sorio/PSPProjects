@@ -25,7 +25,7 @@ import org.apache.commons.math3.special.Gamma;
 public class StatisticalFunctions {
 
 	/** Calculate the mean or average of input data
-	 * @param input data - encaptusaled in a linkedList of double
+	 * @param input data - encapsulated in a linkedList of double
 	 * @return double value with the mean-average
 	 */
 	public static double evalMean(LinkedList<Double> input) {
@@ -50,7 +50,7 @@ public class StatisticalFunctions {
 	}
 
 	/** Evaluate the Std dev. of input data
-	 * @param input data - encaptusaled in a linkedList of double
+	 * @param input data - encapsulated in a linkedList of double
 	 * @return stddev of data
 	 */
 	public static double evalStdDev(LinkedList<Double> input) {
@@ -78,7 +78,7 @@ public class StatisticalFunctions {
 	}
 
 	/** Evaluate the sum of input data
-	 * @param input data - encaptusaled in a linkedList of double
+	 * @param input data - encapsulated in a linkedList of double
 	 * @return sum of data x_i
 	 */
 	public static double evalSum(LinkedList<Double> input) {
@@ -95,7 +95,7 @@ public class StatisticalFunctions {
 	}
 
 	/** Evaluate the sum of the squares of input data
-	 * @param input data - encaptusaled in a linkedList of double
+	 * @param input data - encapsulated in a linkedList of double
 	 * @return sum of squares
 	 */
 	public static double evalSumSqr(LinkedList<Double> input) {
@@ -112,7 +112,7 @@ public class StatisticalFunctions {
 	}
 
 	/** Evaluate the sum of X_i * Y_i
-	 * @param input data - encaptusaled in a linkedList pair of double
+	 * @param input data - encapsulated in a linkedList pair of double
 	 * @return sum of X_i*Y_i
 	 */
 	public static double evalSumXY(LinkedList<PairValues<Double, Double>> input) {
@@ -130,7 +130,7 @@ public class StatisticalFunctions {
 	}
 
 	/** Evaluate the linear regression of pairs of data &lt; X_i, Y_i &gt;
-	 * @param input data - encaptusaled in a linkedList pair of double
+	 * @param input data - encapsulated in a linkedList pair of double
 	 * @return the linear regression coefficients of data
 	 */
 	public static PairValues<Double, Double> evalLinearRegression(LinkedList<PairValues<Double, Double>> input) {
@@ -163,7 +163,7 @@ public class StatisticalFunctions {
 	}
 
 	/** Evaluates the Correlation between XY data
-	 * @param input data - encaptusaled in a linkedList of pair double
+	 * @param input data - encapsulated in a linkedList of pair double
 	 * @return Correlation coefficient
 	 */
 	public static double evalCorrXY(LinkedList<PairValues<Double, Double>> input) {
@@ -188,7 +188,7 @@ public class StatisticalFunctions {
 	}
 
 	/** Evaluate the correlation coefficient squared R2
-	 * @param input data - encaptusaled in a linkedList pair of double
+	 * @param input data - encapsulated in a linkedList pair of double
 	 * @return R2 correlation coefficient squared
 	 */
 	public static double evalCorr2(LinkedList<PairValues<Double, Double>> input) {
@@ -199,7 +199,7 @@ public class StatisticalFunctions {
 	}
 
 	/** Auxiliary function : extract one of the pairs ( X_i or Y_i)
-	 * @param input data - encaptusaled in a linkedList of double
+	 * @param input data - encapsulated in a linkedList of double
 	 * @param pair selected pair 0 or 1
 	 * @return extract one of the pairs
 	 */
@@ -223,7 +223,7 @@ public class StatisticalFunctions {
 	}
 
 	/** Evaluates the variance of a given set of data
-	 * @param input data - encaptusaled in a linkedList of double
+	 * @param input data - encapsulated in a linkedList of double
 	 * @return var variance of data
 	 */
 	public static double evalVariance(LinkedList<Double> input) {
