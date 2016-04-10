@@ -43,4 +43,43 @@ public class StatisticalFunctionsTest {
 		assertEquals(0.49500, result, 0.00001);
 	}
 
+	/**
+	 * Test against the provided test (using the CDF t-distribution inverse function)
+	 * Expected value number
+	 */
+	@Test
+	public void TestRootFinderOne() {
+
+		double[] params = new double[1];
+		params[0] = 6.0;
+		double result = StatisticalFunctions.tDistributionCDFInverse(0.20, params);
+		assertEquals(0.55338, result, 0.00001);
+	}
+	
+	/**
+	 * Test against the provided test (using the CDF t-distribution inverse function)
+	 * Expected value number
+	 */
+	@Test
+	public void TestRootFinderTwo() {
+
+		double[] params = new double[1];
+		params[0] = 15.0;
+		double result = StatisticalFunctions.tDistributionCDFInverse(0.45, params);
+		assertEquals(1.75305, result, 0.00001);
+	}
+	
+	/**
+	 * Test against the provided test (using the CDF t-distribution inverse function)
+	 * Expected value number
+	 */
+	@Test
+	public void TestRootFinderThree() {
+
+		double[] params = new double[1];
+		params[0] = 4.0;
+		double result = StatisticalFunctions.tDistributionCDFInverse(0.495, params);
+		assertEquals(4.60409, result, 0.00001);
+	}
+	
 }

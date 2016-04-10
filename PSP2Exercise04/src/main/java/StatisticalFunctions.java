@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 import org.apache.commons.math3.special.Gamma;
 
+
 /**
  * Package: uniandes.ecos.psp
  *
@@ -277,10 +278,47 @@ public class StatisticalFunctions {
 	 * @param args arguments of this function
 	 * @return t for confidence interval
 	 */
-	public static double tDistributionInverse(double f, double [] args ) {
+	public static double tDistributionCDFInverse(double p, double [] args ) {
 
-		double result = 1.0;
-		return result;
+		int    MAXITER = 50;
+		double ERROR   = 0.0000001;
+		double dx      = 0.0;
+		double f       = 0.0;
+		double fmid    = 0.0;
+		double root    = 0.0;
+		double x1      = 0.0;
+		double x2      = 5.0;
+		
+		f = 0.0 - p;		
+		fmid = tDistributionCDF(x2,args) - p;
+				
+		if (f * fmid >= 0.0) {
+			System.out.println("Root must be bracketed for bisection");
+			return 0.0;
+		}
+		
+		root = x1;
+		
+		if (f < 0.0) {
+			dx = x2 - x1;
+		} else {
+			dx = x1 - x2;
+		}
+
+		for (int j = 1; j <= MAXITER; j++) {
+			
+			dx *= 0.5;
+			double xmid = root + dx;			
+			fmid = tDistributionCDF(xmid,args) - p;
+	
+			if (fmid <= 0.0)
+				root = xmid;
+			if (Math.abs(dx) < ERROR || fmid == 0.0)
+				return root;
+		}
+
+		System.out.println("Too many bisections - MAXITER reached");
+		return 0.0;
 
 	}
 	
