@@ -10,7 +10,7 @@ import org.apache.commons.math3.special.Gamma;
 
 
 /**
- * Package: uniandes.ecos.psp
+ * Package: 
  *
  * Class: StatisticalFunctions StatisticalFunctions.java
  * 
@@ -320,6 +320,28 @@ public class StatisticalFunctions {
 		System.out.println("Too many bisections - MAXITER reached");
 		return 0.0;
 
+	}
+	
+
+	/** Evaluate the significance of a given data set
+	 * @param input this is the vector with the data xi, yi
+	 * @return the signficance
+	 */
+	public static double evalSignificance(LinkedList<PairValues<Double, Double>> input) {
+		
+		
+		
+		return 1.0;
+	}
+	
+	/** Evaluate the prediction interval for a given data set
+	 * @param input this is the vector with the data xi, yi
+	 * @return predicion intervale 
+	 */
+	public static double evalPredictionIntervale(LinkedList<PairValues<Double, Double>> input ) {
+		
+		
+		return 1.0;
 	}
 	
 }

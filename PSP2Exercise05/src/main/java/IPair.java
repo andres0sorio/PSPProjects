@@ -3,7 +3,7 @@
  */
 
 /**
- * Package: uniandes.ecos.psp
+ * Package: 
  *
  * Class: IPairs IPairs.java
  * 

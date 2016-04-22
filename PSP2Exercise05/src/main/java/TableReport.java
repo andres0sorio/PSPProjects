@@ -5,7 +5,7 @@
 import java.util.ArrayList;
 
 /**
- * Package: uniandes.ecos.psp1
+ * Package: 
  *
  * Class: TableReport TableReport.java
  * 
