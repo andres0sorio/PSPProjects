@@ -30,29 +30,31 @@ import java.util.LinkedList;
 
 public class CSVReader {
 
-	private String inputFile = "";
+	private String inputFile;
 
 	BufferedReader buffer = null;
 
 	String cvsSplitBy = ",";
 	int nrow = 0;
 	int ncol = 0;
-
+	boolean fileIsRead = false;
+	
 	ArrayList<ArrayList<Double>> table = new ArrayList<ArrayList<Double>>();
 
 	/** Constructor - gets the input file string
-	 * @param infile
+	 * @param infile input file (in CSV format)
 	 */
 	public CSVReader(String infile) {
 		inputFile = infile;
+		buffer = null;
 	}
 
 	/** This is the core of the class: opens and reads the file
 	 *  data is stored and converted in a matrix
-	 * @throws FileNotFoundException
+	 * @throws FileNotFoundException If file is not found or there is a problem reading it throws exception
 	 */
 	public void readFile() throws FileNotFoundException {
-
+		
 		try {
 
 			buffer = new BufferedReader(new FileReader(inputFile));
@@ -93,8 +95,10 @@ public class CSVReader {
 				try {
 					if (nrow == 0)
 						System.out.println("Current file is empty. Nothing to do.");
-					else
-						System.out.println("End of file reached, success.");
+					else {
+						//System.out.println("End of file reached, success.");
+						fileIsRead = true;
+					}
 					buffer.close();
 				} catch (IOException e) {
 					System.out.println("IO error at closing file.");
@@ -182,4 +186,11 @@ public class CSVReader {
 		return pairOfColumns;
 	}
 	
+	
+	/** Check if input file has already been read
+	 * @return true=file has been read / false otherwise
+	 */
+	public boolean isFileRead() {
+		return fileIsRead;
+	}
 }

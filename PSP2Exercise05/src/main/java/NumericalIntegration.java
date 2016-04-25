@@ -19,7 +19,7 @@
  */
 public class NumericalIntegration {
 
-	public final static double ERROR = 0.000001;
+	public final static double ERROR = 0.000000000001;
 
 	private IOneDimFunction integrand = null;
 	private double lowerLimit = Double.NaN;

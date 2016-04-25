@@ -25,6 +25,9 @@ import org.apache.commons.math3.special.Gamma;
  */
 public class StatisticalFunctions {
 
+	public final static double ERROR = 0.000000000001;
+	public final static int MAXITER = 200;
+	
 	/** Calculate the mean or average of input data
 	 * @param input data - encapsulated in a linkedList of double
 	 * @return double value with the mean-average
@@ -274,14 +277,13 @@ public class StatisticalFunctions {
 	}
 
 	/** Inverse t-Student distribution - calculates the inverse t(F,dof)
-	 * @param f expected p value
+	 * @param p expected p value
 	 * @param args arguments of this function
 	 * @return t for confidence interval
 	 */
 	public static double tDistributionCDFInverse(double p, double [] args ) {
 
-		int    MAXITER = 50;
-		double ERROR   = 0.0000001;
+		
 		double dx      = 0.0;
 		double f       = 0.0;
 		double fmid    = 0.0;
@@ -325,23 +327,66 @@ public class StatisticalFunctions {
 
 	/** Evaluate the significance of a given data set
 	 * @param input this is the vector with the data xi, yi
-	 * @return the signficance
+	 * @return the significance
 	 */
 	public static double evalSignificance(LinkedList<PairValues<Double, Double>> input) {
 		
-		
-		
-		return 1.0;
+		double corrXY = evalCorrXY(input);
+		double corr2 = evalCorr2(input);
+		double n = (double)input.size();
+		double x = Math.abs(corrXY) * Math.sqrt(n-2) / Math.sqrt(1-corr2);		
+		double[] params = new double[1];
+		params[0] = (n-2);
+		double p = tDistributionCDF(x, params);
+		//System.out.println("--> x " + n + " " + x + " " + p);
+		return (1.0-(2.0*p));
 	}
 	
 	/** Evaluate the prediction interval for a given data set
 	 * @param input this is the vector with the data xi, yi
-	 * @return predicion intervale 
+	 * @param xk value at which we evalute the prediction interval
+	 * @return prediction interval (70%)
 	 */
-	public static double evalPredictionIntervale(LinkedList<PairValues<Double, Double>> input ) {
+	public static double evalPredictionIntervale(LinkedList<PairValues<Double, Double>> input, double xk) {
 		
+		double n = (double)input.size();
+		double[] params = new double[1];
+		params[0] = (n-2);
 		
-		return 1.0;
+		double tdist = tDistributionCDFInverse(0.35, params);
+		
+		PairValues<Double, Double> betas = evalLinearRegression(input);
+		
+		LinkedList<Double> line = new LinkedList<Double>();
+		
+		LinkedList<Double> Xi = extractPair(input, 0);
+		
+		Iterator<PairValues<Double, Double>> itr = input.iterator();
+		
+		while( itr.hasNext()) {
+			PairValues<Double, Double> point = itr.next();
+			double diffYi = (point.getY()) - betas.getX() - (betas.getY()*point.getX());
+			line.add(diffYi);
+		}
+		
+		double variance = evalVariance(Xi);
+		
+		double xAvg = evalMean(Xi);
+		
+		double sum = 0.0;
+		
+		Iterator<Double> itr2 = line.iterator();
+		
+		while( itr2.hasNext()) {
+			double point = itr2.next();
+			sum += point*point;
+		}
+		
+		double sigma = Math.sqrt((1.0/(n-2.0))*sum);
+		
+		double range = Math.sqrt( 1.0 + (1.0/n) + (((xk-xAvg)*(xk-xAvg))/((n-1)*variance)));
+		
+		return tdist * sigma * range;
 	}
 	
 }

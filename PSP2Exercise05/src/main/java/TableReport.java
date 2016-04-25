@@ -2,7 +2,10 @@
  *
  */
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Package: 
@@ -42,7 +45,7 @@ public class TableReport {
 	 */
 	public void addRow(String description, Integer value) {
 
-		String add_row = description + " " + value + "\n";
+		String add_row = description + "," + value + "\n";
 		rows.add(add_row);
 	}
 
@@ -53,8 +56,10 @@ public class TableReport {
 	 * @param x corresponding value for this column
 	 */
 	public void addRow(String description, Double x) {
-		String value = String.format("%.4f", x);
-		String add_row = description + " " + value + "\n";
+		
+		DecimalFormat df = new DecimalFormat("0.000000000");
+		df.setRoundingMode(RoundingMode.DOWN);				
+		String add_row = description + "," + df.format(x) + "\n";
 		rows.add(add_row);
 	}
 
@@ -81,7 +86,7 @@ public class TableReport {
 		table_report += "<th> TableReport " + name + "</th></tr><tr>";
 		for (int nrow = 0; nrow < rows.size(); ++nrow) {
 			String item = rows.get(nrow).replace("\n", "");
-			String[] items = item.split("\t");
+			String[] items = item.split(",");
 			for (String td : items) {
 				table_report += "<td>" + td + "</td>";
 			}
@@ -105,6 +110,28 @@ public class TableReport {
 			table_report += rows.get(nrow);
 		}
 		return table_report;
+	}
+
+	/** Add column to current table
+	 * @param arrayList the column to add at the right most of the table
+	 */
+	public void addColumn( ArrayList<Double> arrayList ) {
+		
+		DecimalFormat df = new DecimalFormat("0.000000000");
+		df.setRoundingMode(RoundingMode.DOWN);	
+		
+		if ( rows.size() != arrayList.size() )
+			return;
+		
+		Iterator<String> itr = rows.iterator();
+		int index = 0;
+		while( itr.hasNext()) {
+			String extra = "," + df.format(arrayList.get(index)) + "\n";
+			String extended = itr.next().replace("\n", "").concat(extra);
+			rows.set(index,extended);
+			index += 1;
+		}
+		
 	}
 
 }

@@ -1,6 +1,24 @@
+/** Copyright or License
+*
+*/
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+/**
+* Package: 
+*
+* Class: StatisticalFunctions StatisticalFunctionsTest.java
+* 
+* Original Author: @author AOSORIO
+* 
+* Description: StatisticalTests
+* 
+* Implementation: One test per method
+*
+* Created: Apr 24, 2016 4:15:36 PM
+* 
+*/
 
 public class StatisticalFunctionsTest {
 

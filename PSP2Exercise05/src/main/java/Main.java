@@ -55,21 +55,23 @@ public class Main {
 	 */
 	public static String doPSP2Exercise05() {
 
-		double result1 = 0.0;
-
-		DecimalFormat df = new DecimalFormat("0.00000");
-		df.setRoundingMode(RoundingMode.DOWN);
-
-		CSVReader testFile = new CSVReader("data/Table-1.csv");
-		CSVReader aosorioFile = new CSVReader("data/AOsorio-Table-1.csv");
+		CSVReader testFile    = new CSVReader("data/Table-1.csv");
+		CSVReader aosorioFile = new CSVReader("data/AOsorio-Table-2.csv");
+		CSVReader expectedOne = new CSVReader("data/expected-1.csv");
+		CSVReader expectedTwo = new CSVReader("data/expected-2.csv");
 
 		ArrayList<Analyzer> allAnalysis = new ArrayList<Analyzer>();
 
-		Analyzer an1 = new Analyzer(Analyzer.OPTIONONE, testFile);
-		Analyzer an2 = new Analyzer(Analyzer.OPTIONTWO, testFile);
-		Analyzer an3 = new Analyzer(Analyzer.OPTIONONE, aosorioFile);
-		Analyzer an4 = new Analyzer(Analyzer.OPTIONTWO, aosorioFile);
+		Analyzer an1 = new Analyzer(Analyzer.OPTIONONE, testFile, "Test 1");
+		Analyzer an2 = new Analyzer(Analyzer.OPTIONTWO, testFile, "Test 2");
+		Analyzer an3 = new Analyzer(Analyzer.OPTIONONE, aosorioFile, "AOsorio A1");
+		Analyzer an4 = new Analyzer(Analyzer.OPTIONTWO, aosorioFile, "AOsorio A2");
 
+		an1.setProxySize(386);
+		an2.setProxySize(386);
+		an3.setProxySize(169);
+		an4.setProxySize(169);
+		
 		allAnalysis.add(an1);
 		allAnalysis.add(an2);
 		allAnalysis.add(an3);
@@ -91,9 +93,30 @@ public class Main {
 
 		}
 
-		TableReport summary = new TableReport("Inverse t-distribution");
-
-		return summary.toHTML();
+		//
+		
+		try {
+			expectedOne.readFile();
+			expectedTwo.readFile();
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found, please check");
+		}
+		
+		an1.getReport().addColumn(expectedOne.getSingleColumn(0));
+		an2.getReport().addColumn(expectedTwo.getSingleColumn(0));
+		
+		System.out.println(an1.getReport().toString());
+		System.out.println(an2.getReport().toString());
+		System.out.println(an3.getReport().toString());
+		System.out.println(an4.getReport().toString());
+		
+		String fullMessage = "";
+		fullMessage += an1.getReport().toHTML();
+		fullMessage += an2.getReport().toHTML();
+		fullMessage += an3.getReport().toHTML();
+		fullMessage += an4.getReport().toHTML();
+			
+		return fullMessage;
 
 	}
 
