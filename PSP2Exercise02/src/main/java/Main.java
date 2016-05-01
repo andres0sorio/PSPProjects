@@ -39,9 +39,14 @@ public class Main {
 		RelSizeClassifier sd2 = new RelSizeClassifier("Pages/Chapter");
 		sd2.runClassification(path, infile, false);
 
+		infile = path + "Words-Paragraph.csv";
+		RelSizeClassifier sd3 = new RelSizeClassifier("Words/Paragraph");
+		sd3.runClassification(path, infile, false);
+		
 		sd1.printSummary();
 		sd2.printSummary();
-
+		sd3.printSummary();
+		
 		TableReport expected = new TableReport("Expected values");
 
 		try {
