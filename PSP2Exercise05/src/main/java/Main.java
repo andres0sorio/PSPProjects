@@ -45,6 +45,8 @@ public class Main {
 	public static void main(String[] args) {
 
 		String message = doPSP2Exercise05();
+		
+		doParcial2();
 
 	}
 
@@ -118,6 +120,25 @@ public class Main {
 			
 		return fullMessage;
 
+	}
+	
+	/**
+	 * Funcion creada para resolver Punto 1 del Parcial de Conceptos Avanzados
+	 * donde se preguntaba por la significancia
+	 */
+	public static void doParcial2() {
+		
+		double test1 = StatisticalFunctions.evalSignificance(0.954496574, 10);
+		double test2 = StatisticalFunctions.evalSignificance(0.933306898, 10);
+		System.out.println("Test " + test1 + " " + test2 );
+		
+		double sig1 = StatisticalFunctions.evalSignificance(0.75, 8);
+		double sig2 = StatisticalFunctions.evalSignificance(0.87, 8);
+		
+		System.out.println("Solution " + sig1 + " " + sig2 );
+		
+		
+		
 	}
 
 }
