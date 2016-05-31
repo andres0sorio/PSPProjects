@@ -31,6 +31,8 @@ public class JavaCodeComponents {
 	private int LOC;
 	private int numComments;
 	private boolean insideOfComment;
+	private String file;
+	private String exercise;
 
 	public JavaCodeComponents(String fileName) {
 		super();
@@ -42,6 +44,10 @@ public class JavaCodeComponents {
 		setNumComments(0);
 		LOC = 0;
 		insideOfComment = false;
+		String[] filePath = fileName.split("\\\\");
+		file = filePath[filePath.length - 1];
+		exercise = filePath[3];
+		System.out.println("===== " + file + " " + exercise);
 	}
 
 	public void addClass(String string) {
@@ -91,9 +97,9 @@ public class JavaCodeComponents {
 			} else if (!insideOfComment) {
 				LOC += 1;
 			} else {
-				
+
 			}
-			
+
 		} catch (NullPointerException e) {
 			setNumEmptyLines(getNumEmptyLines() + 1);
 			return;
@@ -123,11 +129,27 @@ public class JavaCodeComponents {
 	public void setNumEmptyLines(int numEmptyLines) {
 		this.numEmptyLines = numEmptyLines;
 	}
-	
+
 	public String getClassName() {
 		if (className.size() != 0)
 			return className.get(0);
-		else return "-";
+		else
+			return "-";
 	}
 
+	/**
+	 * @return the file
+	 */
+	public String getFile() {
+		return file;
+	}
+
+	/**
+	 * @return the exercise
+	 */
+	public String getExercise() {
+		return exercise;
+	}
+
+	
 }

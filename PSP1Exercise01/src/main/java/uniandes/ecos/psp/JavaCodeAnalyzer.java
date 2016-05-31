@@ -152,7 +152,8 @@ public class JavaCodeAnalyzer {
 			System.out.println(" LOC" + "\t" + current.getLOC());
 			// current.getNumComments()
 			// current.getNumEmptyLines()
-
+			
+			results.addRow("Location", current.getExercise() + "," + current.getFile());
 			results.addRow("Class Name", current.getClassName());
 			results.addRow("Parts", current.getNumClasses());
 			results.addRow("Items", current.getNumMethods());
